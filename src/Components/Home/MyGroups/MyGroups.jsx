@@ -186,7 +186,8 @@ const MyGroups = () => {
                 <input name="userEmail" type="email" value={formData.userEmail} onChange={handleInputChange} placeholder="User Email" className="px-4 py-2 border rounded" required />
               </div>
               <div className="flex justify-end gap-4 mt-6">
-                <button type="button" onClick={() => setIsEditDialogOpen(false)} className="px-6 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-lg">Cancel</button>
+                <button type="button" onClick={() => setIsEditDialogOpen(false)}
+                 className="px-6 py-2 bg-gray-300 hover:bg-gray-400 text-gray-800 rounded-lg">Cancel</button>
                 <button type="submit" disabled={loadingUpdate} className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg">
                   {loadingUpdate ? "Updating..." : "Update Group"}
                 </button>
