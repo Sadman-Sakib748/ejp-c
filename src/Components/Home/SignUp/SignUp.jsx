@@ -147,7 +147,6 @@ const SignUp = () => {
                 />
                 {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
               </div>
-
               {/* Password */}
               <div>
                 <label className="block text-sm font-medium text-gray-900 dark:text-white">Password</label>
