@@ -123,7 +123,6 @@ const Login = () => {
             Google
           </button>
         </div>
-
         <p className="text-center text-sm text-gray-900 dark:text-white">
           Don&apos;t have an account?{" "}
           <Link to="/signup" className="underline underline-offset-4 hover:text-purple-300">
