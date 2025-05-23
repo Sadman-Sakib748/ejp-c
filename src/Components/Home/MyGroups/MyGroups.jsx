@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import Spinner from "../Spinner/Spinner";
 
 const MyGroups = () => {
   const initialGroups = useLoaderData();
@@ -52,7 +53,7 @@ const MyGroups = () => {
 
       const updatedData = { title, category, date, location, maxMembers, description, image };
 
-      const res = await fetch(`http://localhost:5000/menu/${_id}`, {
+      const res = await fetch(`https://assignment-10-server-xi-six.vercel.app/menu/${_id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
@@ -84,7 +85,7 @@ const MyGroups = () => {
     if (!groupToDelete) return;
     setLoadingDelete(true);
     try {
-      const res = await fetch(`http://localhost:5000/menu/${groupToDelete._id}`, {
+      const res = await fetch(`https://assignment-10-server-xi-six.vercel.app/menu/${groupToDelete._id}`, {
         method: "DELETE",
       });
       const data = await res.json();
@@ -109,7 +110,7 @@ const MyGroups = () => {
       <h1 className="text-4xl font-bold mb-8 text-center text-blue-600 dark:text-blue-400 tracking-tight">
         My Groups
       </h1>
-
+    <Spinner></Spinner>
       {!Array.isArray(groups) || groups.length === 0 ? (
         <p className="text-center text-gray-500">No groups found.</p>
       ) : (

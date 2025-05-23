@@ -14,7 +14,7 @@ const SignUp = () => {
 
   const postUserToDB = async (userInfo) => {
     try {
-      const res = await fetch('http://localhost:5000/user', {
+      const res = await fetch('https://assignment-10-server-xi-six.vercel.app/user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userInfo),

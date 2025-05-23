@@ -8,7 +8,7 @@ const Featured = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:5000/menu")
+    fetch("https://assignment-10-server-xi-six.vercel.app/menu")
       .then((res) => res.json())
       .then((data) => {
         setGroupsData(data);
@@ -92,7 +92,7 @@ const Featured = () => {
 
             <div className="mt-10 text-center">
               <Link
-                to="/groups"
+                to="/allHobby"
                 className="inline-block bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-md shadow-md hover:shadow-lg transition"
               >
                 Explore All Groups

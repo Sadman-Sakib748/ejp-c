@@ -42,7 +42,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'myGroup/:email',
-        loader: ({ params }) => fetch(`http://localhost:5000/menus/${params.email}`),
+        loader: ({ params }) => fetch(`https://assignment-10-server-xi-six.vercel.app/menus/${params.email}`),
         element: <PrivateRoute><MyGroups></MyGroups></PrivateRoute>,
       },
 
@@ -53,7 +53,7 @@ export const router = createBrowserRouter([
       },
       {
         path: 'feature/:id',
-        loader: ({ params }) => fetch(`http://localhost:5000/menu/${params.id}`),
+        loader: ({ params }) => fetch(`https://assignment-10-server-xi-six.vercel.app/menu/${params.id}`),
         element: <PrivateRoute><BookClubPage></BookClubPage></PrivateRoute>,
       },
     ]

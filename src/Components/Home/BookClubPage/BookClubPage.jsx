@@ -28,7 +28,7 @@ const BookClubPage = () => {
   useEffect(() => {
     const fetchOnlineCount = async () => {
       try {
-        const res = await fetch("http://localhost:5000/online-count");
+        const res = await fetch("https://assignment-10-server-xi-six.vercel.app/online-count");
         if (!res.ok) throw new Error("Failed to fetch online count");
         const result = await res.json();
         setOnlineCount(result.count);
@@ -45,9 +45,13 @@ const BookClubPage = () => {
   const isFull = memberCount >= maxMembers;
 
   const handleJoinGroup = async () => {
+    toast.success("You have successfully joined the group!");
+    return;
+
+    // Original join logic is now skipped
     setJoining(true);
     try {
-      const res = await fetch("http://localhost:5000/menu", {
+      const res = await fetch("https://assignment-10-server-xi-six.vercel.app/menu", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

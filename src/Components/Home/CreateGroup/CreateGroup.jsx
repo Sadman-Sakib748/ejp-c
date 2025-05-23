@@ -56,7 +56,7 @@ const CreateGroup = () => {
         }),
       };
 
-      const response = await fetch("http://localhost:5000/menu", {
+      const response = await fetch("https://assignment-10-server-xi-six.vercel.app/menu", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
