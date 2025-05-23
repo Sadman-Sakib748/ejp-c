@@ -195,7 +195,6 @@ const CreateGroup = () => {
                 />
               </div>
             </div>
-
             <div>
               <label htmlFor="image" className="block font-medium mb-1">
                 Image URL
