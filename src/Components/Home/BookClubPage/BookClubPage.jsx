@@ -195,6 +195,9 @@ const BookClubPage = () => {
           </div>
         </div>
 
+
+
+
         <div className="mt-6">
           <Link to="/" className="text-blue-500 hover:underline">
             ← Back to all groups

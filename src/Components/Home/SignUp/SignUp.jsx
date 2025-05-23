@@ -118,7 +118,6 @@ const SignUp = () => {
                 {errors.name && <p className="text-red-500 text-sm">{errors.name.message}</p>}
               </div>
 
-              {/* Photo URL */}
               <div>
                 <label className="block text-sm font-medium text-gray-900 dark:text-white">Photo URL</label>
                 <input
