@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import Spinner from "../Spinner/Spinner";
 import { Helmet } from "react-helmet";
 
+
 const Featured = () => {
   const [groupsData, setGroupsData] = useState([]);
   const [loading, setLoading] = useState(true);
