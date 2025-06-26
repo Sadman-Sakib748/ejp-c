@@ -1,6 +1,4 @@
-import {
-  createBrowserRouter,
-} from "react-router"; // use react-router-dom for web apps
+import { createBrowserRouter } from "react-router"; // ✅ use react-router-dom, not react-router
 import Main from "../Layout/Main";
 import Home from "../Components/Home/Home/Home";
 import SignUp from "../Components/Home/SignUp/SignUp";
@@ -35,35 +33,29 @@ export const router = createBrowserRouter([
       { path: "signIn", element: <Login /> },
       { path: "about", element: <AboutUs /> },
       { path: "support", element: <Support /> },
-      { path: "contact", element: <Contact /> },  
-      { path: "helpCenter", element: <HelpCenter /> }, 
+      { path: "contact", element: <Contact /> },
+      { path: "helpCenter", element: <HelpCenter /> },
       { path: "communityGuidelines", element: <CommunityGuidelines /> },
       { path: "blog", element: <Blog /> },
       {
         path: "feature/:id",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/menu/${params.id}`),
-        element: <PrivateRoute><BookClubPage /></PrivateRoute>,
-      },
-      {
-        path: "feature",
-        element: <Featured />,
-      },
-      { path: "privacyPolicy", element: <PrivacyPolicy /> },
-      { path: "termsOfService", element: <TermsOfService /> },
-      { path: "cookiePolicy", element: <CookiePolicy /> },
-
-      {
-        path: "allHobby",
+          fetch(`https://ejp-s.vercel.app/menu/${params.id}`),
         element: (
           <PrivateRoute>
-            <AllHubby />
+            <BookClubPage />
           </PrivateRoute>
         ),
       },
+      { path: "feature", element: <Featured /> },
+      { path: "privacyPolicy", element: <PrivacyPolicy /> },
+      { path: "termsOfService", element: <TermsOfService /> },
+      { path: "cookiePolicy", element: <CookiePolicy /> },
+      { path: "allHobby", element: <AllHubby /> },
     ],
   },
 
+  // ✅ Dashboard route fixed and wrapped correctly
   {
     path: "/dashboard",
     element: (
@@ -74,19 +66,38 @@ export const router = createBrowserRouter([
     errorElement: <ErrorPage />,
     children: [
       {
+        index: true, // ✅ Default dashboard page
+        element: (
+          <PrivateRoute>
+            <DashboardHome />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "home",
+        element: (
+          <PrivateRoute>
+            <DashboardHome />
+          </PrivateRoute>
+        ),
+      },
+      {
         path: "createGroup",
-        element: <PrivateRoute><CreateGroup /></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <CreateGroup />
+          </PrivateRoute>
+        ),
       },
       {
         path: "myGroup/:email",
         loader: ({ params }) =>
-          fetch(`http://localhost:5000/menus/${params.email}`),
-        element: <PrivateRoute><MyGroups /></PrivateRoute>,
-      },
-      
-      {
-        path: "home",
-        element: <PrivateRoute><DashboardHome /></PrivateRoute>,
+          fetch(`https://ejp-s.vercel.app/menus/${params.email}`),
+        element: (
+          <PrivateRoute>
+            <MyGroups />
+          </PrivateRoute>
+        ),
       },
     ],
   },

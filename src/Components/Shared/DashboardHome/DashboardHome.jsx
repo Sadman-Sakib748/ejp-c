@@ -14,28 +14,41 @@ const DashboardHome = () => {
   const [totalGroups, setTotalGroups] = useState(0);
   const [totalUsers, setTotalUsers] = useState(0);
   const [categoryCount, setCategoryCount] = useState([]);
+  const [loading, setLoading] = useState(true); // ✅ Loading state
 
-  const BASE_URL = "http://localhost:5000"; // or your deployed backend
+  const BASE_URL = "https://ejp-s.vercel.app";
 
   useEffect(() => {
-    axios.get(`${BASE_URL}/menu`).then((res) => {
-      setTotalGroups(res.data.length);
+    const fetchData = async () => {
+      try {
+        const [groupRes, userRes] = await Promise.all([
+          axios.get(`${BASE_URL}/menu`),
+          axios.get(`${BASE_URL}/user`),
+        ]);
 
-      const categoryMap = {};
-      res.data.forEach((item) => {
-        const cat = item.category || "Uncategorized";
-        categoryMap[cat] = (categoryMap[cat] || 0) + 1;
-      });
+        setTotalGroups(groupRes.data.length);
 
-      const categoryData = Object.entries(categoryMap).map(([key, value]) => ({
-        name: key,
-        value,
-      }));
+        const categoryMap = {};
+        groupRes.data.forEach((item) => {
+          const cat = item.category || "Uncategorized";
+          categoryMap[cat] = (categoryMap[cat] || 0) + 1;
+        });
 
-      setCategoryCount(categoryData);
-    });
+        const categoryData = Object.entries(categoryMap).map(([key, value]) => ({
+          name: key,
+          value,
+        }));
 
-    axios.get(`${BASE_URL}/user`).then((res) => setTotalUsers(res.data.length));
+        setCategoryCount(categoryData);
+        setTotalUsers(userRes.data.length);
+        setLoading(false); // ✅ Turn off loading after data loaded
+      } catch (error) {
+        console.error("Error loading dashboard data:", error);
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, []);
 
   const cards = [
@@ -63,14 +76,17 @@ const DashboardHome = () => {
   ];
 
   const COLORS = [
-    "#3B82F6", // blue
-    "#10B981", // green
-    "#F59E0B", // amber
-    "#EF4444", // red
-    "#6366F1", // indigo
-    "#EC4899", // pink
-    "#8B5CF6", // violet
+    "#3B82F6", "#10B981", "#F59E0B", "#EF4444", "#6366F1", "#EC4899", "#8B5CF6",
   ];
+
+  // ✅ Show spinner if loading
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-[60vh]">
+        <div className="w-12 h-12 border-4 border-blue-500 border-dashed rounded-full animate-spin"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-10">
@@ -90,7 +106,7 @@ const DashboardHome = () => {
         ))}
       </div>
 
-      {/* Pie Chart Section */}
+      {/* Pie Chart */}
       <div className="bg-white dark:bg-gray-900 border border-gray-200 dark:border-gray-700 p-8 rounded-2xl shadow-md">
         <h2 className="text-2xl font-semibold mb-6 text-gray-800 dark:text-white">
           Group Distribution by Category
@@ -117,14 +133,14 @@ const DashboardHome = () => {
             </Pie>
             <Tooltip
               contentStyle={{
-                backgroundColor: "#1f2937", // dark gray
+                backgroundColor: "#1f2937",
                 borderRadius: "10px",
                 color: "#fff",
               }}
             />
             <Legend
               wrapperStyle={{
-                color: "#4B5563", // neutral-600
+                color: "#4B5563",
               }}
             />
           </PieChart>

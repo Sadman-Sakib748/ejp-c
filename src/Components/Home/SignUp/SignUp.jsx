@@ -14,7 +14,7 @@ const SignUp = () => {
 
   const postUserToDB = async (userInfo) => {
     try {
-      const res = await fetch('http://localhost:5000/user', {
+      const res = await fetch('https://ejp-s.vercel.app/user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userInfo),
@@ -64,11 +64,11 @@ const SignUp = () => {
     try {
       setLoading(true);
       const result = await googleSignIn();
-      const loggedUser = result.user;
+      const loggedUser = result?.user;
 
       const userInfo = {
-        name: loggedUser.displayName,
-        email: loggedUser.email,
+        name: loggedUser?.displayName,
+        email: loggedUser?.email,
       };
 
       const res = await postUserToDB(userInfo);
