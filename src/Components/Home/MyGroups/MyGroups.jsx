@@ -71,7 +71,7 @@ const MyGroups = () => {
       };
 
       const res = await fetch(
-        `https://assignment-10-server-xi-six.vercel.app/menu/${_id}`,
+        `http://localhost:5000/menu/${_id}`,
         {
           method: "PUT",
           headers: {
@@ -108,7 +108,7 @@ const MyGroups = () => {
     setLoadingDelete(true);
     try {
       const res = await fetch(
-        `https://assignment-10-server-xi-six.vercel.app/menu/${groupToDelete._id}`,
+        `http://localhost:5000/menu/${groupToDelete._id}`,
         {
           method: "DELETE",
         }

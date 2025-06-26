@@ -1,7 +1,6 @@
 import {
   createBrowserRouter,
-  RouterProvider,
-} from "react-router";
+} from "react-router"; // use react-router-dom for web apps
 import Main from "../Layout/Main";
 import Home from "../Components/Home/Home/Home";
 import SignUp from "../Components/Home/SignUp/SignUp";
@@ -13,50 +12,82 @@ import CreateGroup from "../Components/Home/CreateGroup/CreateGroup";
 import MyGroups from "../Components/Home/MyGroups/MyGroups";
 import ErrorPage from "../Components/Home/ErrorPage/ErrorPage";
 import PrivateRoute from "./PrivateRoute";
+import Support from "../Components/Home/Support/Support";
+import AboutUs from "../Components/Home/AboutUs/AboutUs";
+import Contact from "../Components/Home/Contact/Contact";
+import HelpCenter from "../Components/Shared/Footer/HelpCenter/HelpCenter";
+import CommunityGuidelines from "../Components/Shared/Footer/CommunityGuidelines/CommunityGuidelines";
+import Blog from "../Components/Shared/Footer/Blog/Blog";
+import PrivacyPolicy from "../Components/Shared/Footer/PrivacyPolicy/PrivacyPolicy";
+import TermsOfService from "../Components/Shared/Footer/TermsOfService/TermsOfService";
+import CookiePolicy from "../Components/Shared/Footer/CookiePolicy/CookiePolicy";
+import DashboardHome from "../Components/Shared/DashboardHome/DashboardHome";
+import Dashbordlyout from "../Components/Shared/Dashbord/Dashbordlyout";
 
 export const router = createBrowserRouter([
   {
     path: "/",
-    element: <Main></Main>,
+    element: <Main />,
+    errorElement: <ErrorPage />,
+    children: [
+      { path: "/", element: <Home /> },
+      { path: "signup", element: <SignUp /> },
+      { path: "signIn", element: <Login /> },
+      { path: "about", element: <AboutUs /> },
+      { path: "support", element: <Support /> },
+      { path: "contact", element: <Contact /> },  
+      { path: "helpCenter", element: <HelpCenter /> }, 
+      { path: "communityGuidelines", element: <CommunityGuidelines /> },
+      { path: "blog", element: <Blog /> },
+      {
+        path: "feature/:id",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/menu/${params.id}`),
+        element: <PrivateRoute><BookClubPage /></PrivateRoute>,
+      },
+      {
+        path: "feature",
+        element: <Featured />,
+      },
+      { path: "privacyPolicy", element: <PrivacyPolicy /> },
+      { path: "termsOfService", element: <TermsOfService /> },
+      { path: "cookiePolicy", element: <CookiePolicy /> },
+
+      {
+        path: "allHobby",
+        element: (
+          <PrivateRoute>
+            <AllHubby />
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
+
+  {
+    path: "/dashboard",
+    element: (
+      <PrivateRoute>
+        <Dashbordlyout />
+      </PrivateRoute>
+    ),
     errorElement: <ErrorPage />,
     children: [
       {
-        path: '/',
-        element: <Home></Home>
+        path: "createGroup",
+        element: <PrivateRoute><CreateGroup /></PrivateRoute>,
       },
       {
-        path: 'signup',
-        element: <SignUp></SignUp>
+        path: "myGroup/:email",
+        loader: ({ params }) =>
+          fetch(`http://localhost:5000/menus/${params.email}`),
+        element: <PrivateRoute><MyGroups /></PrivateRoute>,
       },
+      
       {
-        path: 'signIn',
-        element: <Login></Login>
+        path: "home",
+        element: <PrivateRoute><DashboardHome /></PrivateRoute>,
       },
-      {
-        path: 'allHobby',
-        element: <PrivateRoute><AllHubby></AllHubby></PrivateRoute>
-      },
-      {
-        path: 'createGroup',
-        element: <PrivateRoute><CreateGroup></CreateGroup></PrivateRoute>
-      },
-      {
-        path: 'myGroup/:email',
-        loader: ({ params }) => fetch(`https://assignment-10-server-xi-six.vercel.app/menus/${params.email}`),
-        element: <PrivateRoute><MyGroups></MyGroups></PrivateRoute>,
-      },
-
-        {
-        path: 'feature',
-        element: <PrivateRoute><Featured></Featured></PrivateRoute>
-
-      },
-      {
-        path: 'feature/:id',
-        loader: ({ params }) => fetch(`https://assignment-10-server-xi-six.vercel.app/menu/${params.id}`),
-        element: <PrivateRoute><BookClubPage></BookClubPage></PrivateRoute>,
-      },
-    ]
-
+    ],
   },
 ]);

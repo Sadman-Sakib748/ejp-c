@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Menu, X, Sun, Moon, LogOut, User } from "lucide-react";
-import { Link } from "react-router"; // Fixed from 'react-router'
-
+import { Menu, X, Sun, Moon, LogOut, User, LayoutDashboard } from "lucide-react";
+import { Link } from "react-router"; // corrected import for react-router-dom
 import { MdOutlineGroup } from "react-icons/md";
 import useAuth from "../../hook/useAuth";
 
@@ -47,13 +46,20 @@ const Navbar = () => {
     closeMenu();
   };
 
+  // Updated navLinks with About Us, Contact, Support instead of Create Group & My Groups
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/allHobby", label: "All Groups" },
+    { href: "/about", label: "About Us" },
+    { href: "/contac", label: "Contact" },
+    { href: "/support", label: "Support" },
     ...(user
       ? [
-          { href: "/createGroup", label: "Create Group" },
-          { href: `/myGroup/${encodeURIComponent(user.email)}`, label: "My Groups" }, // Updated
+          {
+            href: "/dashboard",
+            label: "Dashboard",
+            icon: <LayoutDashboard size={16} />,
+          },
         ]
       : []),
   ];
@@ -72,9 +78,10 @@ const Navbar = () => {
             <Link
               key={link.href}
               to={link.href}
-              className="text-sm font-medium hover:text-blue-600"
+              className="text-sm font-medium flex items-center gap-1 hover:text-blue-600"
               onClick={closeMenu}
             >
+              {link.icon && <span>{link.icon}</span>}
               {link.label}
             </Link>
           ))}
@@ -101,25 +108,48 @@ const Navbar = () => {
 
               {isDropdownOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 shadow-md rounded z-50">
-                  <div className="p-3 border-b">
-                    <div className="font-medium">
-                      <img
-                        src={user?.photoURL || "User"}
-                        alt=""
-                        className="h-full w-full object-cover rounded-full"
-                      />
-                    </div>
-                    <div className="text-gray-500">
-                      <p className="text-xs">{user.email}</p>
+                  <div className="p-3 border-b flex items-center gap-3">
+                    <img
+                      src={user?.photoURL || ""}
+                      alt="User"
+                      className="h-10 w-10 object-cover rounded-full"
+                    />
+                    <div>
+                      <div className="font-medium">{user.displayName || "User"}</div>
+                      <div className="text-gray-500 text-xs truncate max-w-[150px]">
+                        {user.email}
+                      </div>
                     </div>
                   </div>
+                  {/* Updated dropdown links with About, Contact, Support */}
                   <Link
-                    to={`/myGroup/${encodeURIComponent(user.email)}`} // Updated link
+                    to="/about"
                     className="flex items-center px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
                     onClick={() => setIsDropdownOpen(false)}
                   >
-                    <User size={16} className="mr-2" />
-                    My Groups
+                    About Us
+                  </Link>
+                  <Link
+                    to="/contact"
+                    className="flex items-center px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
+                    onClick={() => setIsDropdownOpen(false)}
+                  >
+                    Contact
+                  </Link>
+                  <Link
+                    to="/support"
+                    className="flex items-center px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
+                    onClick={() => setIsDropdownOpen(false)}
+                  >
+                    Support
+                  </Link>
+                  <Link
+                    to="/dashboard"
+                    className="flex items-center px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700"
+                    onClick={() => setIsDropdownOpen(false)}
+                  >
+                    <LayoutDashboard size={16} className="mr-2" />
+                    Dashboard
                   </Link>
                   <button
                     onClick={handleSignOut}
@@ -164,9 +194,10 @@ const Navbar = () => {
                 <Link
                   key={link.href}
                   to={link.href}
-                  className="text-sm font-medium hover:text-blue-600"
+                  className="text-sm font-medium flex items-center gap-1 hover:text-blue-600"
                   onClick={closeMenu}
                 >
+                  {link.icon && <span>{link.icon}</span>}
                   {link.label}
                 </Link>
               ))}

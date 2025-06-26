@@ -25,7 +25,7 @@ const AllHubby = () => {
 
   useEffect(() => {
     setLoading(true);
-    fetch("https://assignment-10-server-xi-six.vercel.app/menu")
+    fetch("http://localhost:5000/menu")
       .then((res) => res.json())
       .then((data) => {
         setGroupsData(data);
