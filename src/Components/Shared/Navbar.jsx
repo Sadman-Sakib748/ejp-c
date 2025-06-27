@@ -65,7 +65,7 @@ const Navbar = () => {
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-white dark:bg-gray-900/80 backdrop-blur">
+    <header className="sticky top-0 z-50 w-full border-b bg-blue-500 dark:bg-gray-900/80 backdrop-blur">
       <div className="container flex h-16 items-center justify-between px-4">
         <Link to="/" onClick={closeMenu} className="flex items-center gap-2">
           <MdOutlineGroup className="text-4xl" />
