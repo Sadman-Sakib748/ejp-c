@@ -40,7 +40,7 @@ export const router = createBrowserRouter([
       {
         path: "feature/:id",
         loader: ({ params }) =>
-          fetch(`https://ejp-s.vercel.app/menu/${params.id}`),
+          fetch(`https://ejp-s-sadmansakib34523-gmailcoms-projects.vercel.app/menu/${params.id}`),
         element: (
           <PrivateRoute>
             <BookClubPage />
@@ -92,7 +92,7 @@ export const router = createBrowserRouter([
       {
         path: "myGroup/:email",
         loader: ({ params }) =>
-          fetch(`https://ejp-s.vercel.app/menus/${params.email}`),
+          fetch(`https://ejp-s-sadmansakib34523-gmailcoms-projects.vercel.app/menus/${params.email}`),
         element: (
           <PrivateRoute>
             <MyGroups />

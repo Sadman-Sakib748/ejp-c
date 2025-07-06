@@ -9,7 +9,7 @@ const Featured = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("https://ejp-s.vercel.app/menu")
+    fetch("https://ejp-s-sadmansakib34523-gmailcoms-projects.vercel.app/menu")
       .then((res) => res.json())
       .then((data) => {
         setGroupsData(data);

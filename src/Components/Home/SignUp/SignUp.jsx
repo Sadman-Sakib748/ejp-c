@@ -14,7 +14,7 @@ const SignUp = () => {
 
   const postUserToDB = async (userInfo) => {
     try {
-      const res = await fetch('https://ejp-s.vercel.app/user', {
+      const res = await fetch('https://ejp-s-sadmansakib34523-gmailcoms-projects.vercel.app/user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userInfo),

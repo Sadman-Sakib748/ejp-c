@@ -56,7 +56,7 @@ const CreateGroup = () => {
         }),
       };
 
-      const response = await fetch("https://ejp-s.vercel.app/menu", {
+      const response = await fetch("https://ejp-s-sadmansakib34523-gmailcoms-projects.vercel.app/menu", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
