@@ -16,7 +16,7 @@ const DashboardHome = () => {
   const [categoryCount, setCategoryCount] = useState([]);
   const [loading, setLoading] = useState(true); // ✅ Loading state
 
-  const BASE_URL = "https://ejp-s-sadmansakib34523-gmailcoms-projects.vercel.app";
+  const BASE_URL = "http://localhost:5000";
 
   useEffect(() => {
     const fetchData = async () => {

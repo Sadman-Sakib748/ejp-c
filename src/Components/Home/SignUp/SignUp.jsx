@@ -1,10 +1,11 @@
 import { useContext, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useForm } from 'react-hook-form';
-import { AuthContext } from '../../../Providers/AuthProviders';
+
 import { Link, useNavigate } from 'react-router';
 import Spinner from '../Spinner/Spinner';
 import toast from 'react-hot-toast';
+import { AuthContext } from '../../../Providers/AuthContext';
 
 const SignUp = () => {
   const { register, handleSubmit, reset, formState: { errors } } = useForm();
@@ -14,7 +15,7 @@ const SignUp = () => {
 
   const postUserToDB = async (userInfo) => {
     try {
-      const res = await fetch('https://ejp-s-sadmansakib34523-gmailcoms-projects.vercel.app/user', {
+      const res = await fetch('http://localhost:5000/user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(userInfo),

@@ -79,7 +79,7 @@ const MyGroups = () => {
         image,
       };
 
-      const res = await fetch(`https://ejp-s-sadmansakib34523-gmailcoms-projects.vercel.app/menu/${_id}`, {
+      const res = await fetch(`http://localhost:5000/menu/${_id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(updatedData),
@@ -110,7 +110,7 @@ const MyGroups = () => {
     setLoadingDelete(true);
     try {
       const res = await fetch(
-        `https://ejp-s-sadmansakib34523-gmailcoms-projects.vercel.app/menu/${groupToDelete._id}`,
+        `http://localhost:5000/menu/${groupToDelete._id}`,
         {
           method: "DELETE",
         }
